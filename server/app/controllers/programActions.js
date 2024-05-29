@@ -1,3 +1,5 @@
+const tables = require("../../database/tables");
+
 // Some data to make the trick
 
 const programs = [
@@ -25,25 +27,18 @@ const programs = [
 
 // Declare the action
 
-const browse = (req, res) => {
-  if (req.query.q != null) {
-    const filteredPrograms = programs.filter((program) =>
-      program.synopsis.includes(req.query.q)
-    );
-
-    res.json(filteredPrograms);
-  } else {
-    res.json(programs);
-  }
+const browse = async (req, res) => {
+  const categoriesFromDB = await tables.category.readAll();
+  res.json(categoriesFromDB);
 };
 
 const read = (req, res) => {
   const parsedId = parseInt(req.params.id, 10);
 
-  const program = programs.find((p) => p.id === parsedId);
+  const category = programs.find((p) => p.id === parsedId);
 
-  if (program != null) {
-    res.json(program);
+  if (category != null) {
+    res.json(category);
   } else {
     res.sendStatus(404);
   }
@@ -52,4 +47,3 @@ const read = (req, res) => {
 // Export it to import it somewhere else
 
 module.exports = { browse, read };
-
