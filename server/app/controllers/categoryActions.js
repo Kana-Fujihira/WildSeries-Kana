@@ -16,7 +16,7 @@ const categories = [
 // Declare the actions
 
 const browse = async (req, res) => {
- const categoriesFromDB = await tables.category.readAll();
+  const categoriesFromDB = await tables.category.readAll();
   res.json(categoriesFromDB);
 };
 

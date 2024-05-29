@@ -28,17 +28,17 @@ const programs = [
 // Declare the action
 
 const browse = async (req, res) => {
-  const categoriesFromDB = await tables.category.readAll();
-  res.json(categoriesFromDB);
+  const programsFromDB = await tables.program.readAll();
+  res.json(programsFromDB);
 };
 
 const read = (req, res) => {
   const parsedId = parseInt(req.params.id, 10);
 
-  const category = programs.find((p) => p.id === parsedId);
+  const program = programs.find((p) => p.id === parsedId);
 
-  if (category != null) {
-    res.json(category);
+  if (program != null) {
+    res.json(program);
   } else {
     res.sendStatus(404);
   }
